@@ -16,14 +16,14 @@ os.chdir(script_dir)
 pygame.init()
 
 clock = pygame.time.Clock()
-pygame.display.set_icon(pygame.image.load("composter.png"))
+pygame.display.set_icon(pygame.image.load("assets/composter.png"))
 POINT_GET = pygame.USEREVENT
 do_break = False
-img_files = ["apple.png", "carrot.png", "egg.png", "grass.png", "leaf.png", "wheat.png", "metal.png", "milk.png", "naylon.png", "plastic.png", "paper.png", "bone.png", "glass.png", "coin.png"]
-img_test = ["apple.png", "carrot.png", "egg.png", "grass.png", "leaf.png", "wheat.png", "metal.png", "milk.png", "naylon.png", "plastic.png", "paper.png", "bone.png", "glass.png"]
+img_files = ["assets/apple.png", "assets/carrot.png", "assets/egg.png", "assets/grass.png", "assets/leaf.png", "assets/wheat.png", "assets/metal.png", "assets/milk.png", "assets/naylon.png", "assets/plastic.png", "assets/paper.png", "assets/bone.png", "assets/glass.png", "assets/coin.png"]
+img_test = ["assets/apple.png", "assets/carrot.png", "assets/egg.png", "assets/grass.png", "assets/leaf.png", "assets/wheat.png", "assets/metal.png", "assets/milk.png", "assets/naylon.png", "assets/plastic.png", "assets/paper.png", "assets/bone.png", "assets/glass.png"]
 point_dict = {
-    "apple.png": 2, "carrot.png": 2, "egg.png": 2, "grass.png": 1, "leaf.png": 1, "wheat.png": 2, "metal.png": -3, "glass.png": -3, "bone.png": -3, "milk.png": -2, "naylon.png": -2,
-    "plastic.png": -2, "paper.png": -1, "coin.png": 0
+    "assets/apple.png": 2, "assets/carrot.png": 2, "assets/egg.png": 2, "assets/grass.png": 1, "assets/leaf.png": 1, "assets/wheat.png": 2, "assets/metal.png": -3, "assets/glass.png": -3, "assets/bone.png": -3, "assets/milk.png": -2, "assets/naylon.png": -2,
+    "assets/plastic.png": -2, "assets/paper.png": -1, "assets/coin.png": 0
 }
 with open("data.json", "r") as f:
     data = json.load(f)
@@ -54,11 +54,11 @@ items_existed = []
 run = True
 in_main_menu = True
 speed_boost_activated = False
-coin_img = pygame.image.load("coin.png")
+coin_img = pygame.image.load("assets/coin.png")
 coin_img = pygame.transform.scale_by(coin_img, 1/40)
-point_img = pygame.image.load("point.png")
+point_img = pygame.image.load("assets/point.png")
 point_img = pygame.transform.scale_by(point_img, 1/40)
-speed_img = pygame.image.load("speed_boost.png")
+speed_img = pygame.image.load("assets/speed_boost.png")
 speed_img = pygame.transform.scale_by(speed_img, 5 / 128)
 width, height = 600, 600
 screen = pygame.display.set_mode((600, 600))
@@ -144,7 +144,7 @@ class ImgBasedButton:
         self.origin = pygame.image.load(self.img)
 class Composter:
     def __init__(self, pos, screen_obj):
-        self.img = pygame.image.load("composter.png")
+        self.img = pygame.image.load("assets/composter.png")
         self.width = self.img.get_width()
         self.height = self.img.get_height()
         self.pos = pos
@@ -309,14 +309,14 @@ how_to_play_text2 = font.render(' şeyleri yakalamayın. Kompost kutusunu sola v
 how_to_play_text3 = font.render('tirmek için okları kullanın. Puan kazanacak ve kaybedeceksiniz.', True, (0, 0, 0))
 how_to_play_text4 = font.render('Doğruluğunuzu test etmek için "Test" düğmesine tıklayın. Hızlan-', True, (0, 0, 0))
 how_to_play_text5 = font.render("dırıcılarınızı kullanmak için boşluk tuşuna basın.", True, (0, 0, 0))
-pause_button = ImgBasedButton((5, 45), "pause.png", screen)
+pause_button = ImgBasedButton((5, 45), "assets/pause.png", screen)
 pause_button.scale(5 / 128)
-main_menu_composter2 = pygame.image.load("composter.png")
+main_menu_composter2 = pygame.image.load("assets/composter.png")
 main_menu_composter = pygame.transform.scale(main_menu_composter2, (300, 300))
 main_menu_composter_rect = main_menu_composter.get_rect(center=(width // 2, height // 4))
 composter = Composter([270, 525], screen)
 high_scores_button = Button((150, 350), screen, font, text="Yüksek Skorlar", outline_width = 2, hitbox = 'ellipse', width = 160)
-exit_button = ImgBasedButton((5, 0), "arrow.png", screen)
+exit_button = ImgBasedButton((5, 0), "assets/arrow.png", screen)
 speed_purchase = Button((245, 200), screen, font, 10, 10, 10, 10, "rect", 125, 25, "400")
 composter.scale(75 / 2048)
 exit_button.scale(15 / 512)
@@ -482,7 +482,7 @@ while run:
                     big_font = pygame.font.SysFont("Comic Sans", 60)
                     text = big_font.render("DURDURULDU", True, (0, 0, 0))
                     rect = text.get_rect(center=(300, 300))
-                    pause_button.img = "start.png"
+                    pause_button.img = "assets/start.png"
                     pause_button.update()
                     pause_button.scale(5 / 128)
                     while pause:
@@ -500,7 +500,7 @@ while run:
                                 save()
                                 sys.exit()
                         if pause_button.is_clicked():
-                            pause_button.img = "pause.png"
+                            pause_button.img = "assets/pause.png"
                             pause_button.update()
                             pause_button.scale(5 / 128)
                             pause = False
@@ -532,6 +532,7 @@ while run:
                 composter.draw()
                 counter.render_point(points, (50, 30))
                 if 60 - ((pygame.time.get_ticks() - start) // 1000) == 0:
+                    items.clear()
                     money += int((9 * points) / 2)
                     speed_boost_activated = False
                     points_2 += points
@@ -644,6 +645,7 @@ while run:
                         del items[items.index(item)]
                     item.draw()
                 if 60 - ((pygame.time.get_ticks() - start) // 1000) == 0:
+                    items.clear()
                     in_main_menu = True
                     for item in items_existed:
                         if item.caught:
@@ -660,7 +662,7 @@ while run:
                     start2 = pygame.time.get_ticks()
                     waiting = True
                     score_text = font.render(f"Yüzde: {score}", True, (0, 0, 0))
-                    items_existed = []
+                    items_existed.clear()
                     while waiting:
                         for event in pygame.event.get():
                             if event.type == 256:
